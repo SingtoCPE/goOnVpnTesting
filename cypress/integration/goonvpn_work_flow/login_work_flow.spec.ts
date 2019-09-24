@@ -1,15 +1,14 @@
 const urlMain = "https://www.goonvpn.com/";
 const urlLogin = "https://www.goonvpn.com/my-account";
-describe("login flow", () => {
+describe("Login work flow", () => {
   it("Go to URL.", () => {
     cy.visit(urlMain);
   });
   it("Login: enter username and enter password.", () => {
     cy.wait(1000);
-    cy.get('[class="btn-topbar login"]').click();
-    cy.get("#loginform-username")
-      .click()
-      .type("lion_king_1144@hotmail.com", { delay: 200 });
+    cy.get('[class="btn-topbar login"]').click()
+    cy.get('#loginform-username').click()
+      .type('lion_king_1144@hotmail.com',{ delay: 200 })
     cy.wait(500);
     cy.get("#loginform-password")
       .click()
