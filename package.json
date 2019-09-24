@@ -1,0 +1,23 @@
+{
+  "name": "goonvpntesting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SingtoCPE/goOnVpnTesting.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SingtoCPE/goOnVpnTesting/issues"
+  },
+  "homepage": "https://github.com/SingtoCPE/goOnVpnTesting#readme",
+  "devDependencies": {
+    "cypress": "^3.4.1"
+  }
+}
