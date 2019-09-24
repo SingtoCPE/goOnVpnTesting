@@ -1,7 +1,7 @@
 const urlMain = "https://www.goonvpn.com/";
 const urlLogin = "https://www.goonvpn.com/my-account";
 describe("Login work flow", () => {
-  it("Go to URL.", () => {
+  it("Go to login.", () => {
     cy.visit(urlMain);
   });
   it("Login: enter username and enter password.", () => {
