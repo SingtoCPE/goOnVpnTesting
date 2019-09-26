@@ -5,10 +5,9 @@ const urlLogin = "https://www.goonvpn.com/login";
 const urlLoged = "https://www.goonvpn.com/my-account";
 const email = "lion_king_1144@hotmail.com";
 const pass = "11442525";
+
 describe("Work flow : Login", () => {
   beforeEach("go to URL.", () => {
-    cy.visit(urlMain).contains("หน้าแรก");
-    cy.url().should("include", "/");
     cy.get(":nth-child(1) > .btn-topbar").click();
     cy.url().should("include", "login");
   });

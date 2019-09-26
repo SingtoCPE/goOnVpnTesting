@@ -1,6 +1,7 @@
 /// <reference types = 'cypress'/>
 
 const urlMain = "https://www.goonvpn.com/";
+
 describe("Work flow : Main page ", () => {
   beforeEach('go to URL.',() => {
     cy.visit(urlMain)
