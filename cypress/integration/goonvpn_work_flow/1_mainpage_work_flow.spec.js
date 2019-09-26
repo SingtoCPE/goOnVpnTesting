@@ -1,8 +1,11 @@
+/// <reference types = 'cypress'/>
+
 const urlMain = "https://www.goonvpn.com/";
 describe("Work flow : Main page ", () => {
-  //--------------------------------------------------------------------------------
-  it("Go to URL.", () => {
-    cy.visit(urlMain);
+  beforeEach('go to URL.',() => {
+    cy.visit(urlMain)
+      .wait(1000)
+      .contains('หน้าแรก')
   });
   //--------------------------------------------------------------------------------
   it("work flow : wallpaper menu bar ", () => {
@@ -42,7 +45,6 @@ describe("Work flow : Main page ", () => {
     )
       .click()
       .wait(1500);
-    cy.visit(urlMain);
   });
   //--------------------------------------------------------------------------------
   it("work flow : ข่าวโปรโมชั่น bar", () => {
@@ -59,7 +61,6 @@ describe("Work flow : Main page ", () => {
     cy.get(".owl-wrapper > :nth-child(2) > .news-desc > h4 > a")
       .click()
       .wait(1500);
-    cy.visit(urlMain);
   });
   //--------------------------------------------------------------------------------
   it("work flow : เกมส์ออนไลน์ยอดนิยม bar", () => {
@@ -68,8 +69,7 @@ describe("Work flow : Main page ", () => {
       .wait(1500);
     cy.get(":nth-child(2) > .col-md-12 > .text-center > .btn")
       .click()
-      .wait(1500);
-    cy.visit(urlMain);
+      .wait(1500)
   });
   // --------------------------------------------------------------------------------
   it("work flow : BLOG & FEATURES bar", () => {
@@ -100,35 +100,33 @@ describe("Work flow : Main page ", () => {
     cy.get(":nth-child(3) > .col-md-12 > .text-center > .btn")
       .click()
       .wait(500);
-    cy.visit(urlMain);
   });
   it("work flow : footer bar", () => {
     cy.get("footer")
       .scrollIntoView()
       .wait(1500);
-    cy.get('.list-unstyled > :nth-child(1) > a')
+    cy.get(".list-unstyled > :nth-child(1) > a")
       .click()
       .wait(1500);
     cy.visit(urlMain);
-    cy.get('.list-unstyled > :nth-child(2) > a')
+    cy.get(".list-unstyled > :nth-child(2) > a")
       .click()
       .wait(1500);
     cy.visit(urlMain);
-    cy.get('.list-unstyled > :nth-child(3) > a')
+    cy.get(".list-unstyled > :nth-child(3) > a")
       .click()
       .wait(1500);
     cy.visit(urlMain);
-    cy.get('.list-unstyled > :nth-child(4) > a')
+    cy.get(".list-unstyled > :nth-child(4) > a")
       .click()
       .wait(1500);
     cy.visit(urlMain);
-    cy.get('.list-unstyled > :nth-child(5) > a')
+    cy.get(".list-unstyled > :nth-child(5) > a")
       .click()
       .wait(1500);
     cy.visit(urlMain);
-    cy.get('.list-unstyled > :nth-child(6) > a')
+    cy.get(".list-unstyled > :nth-child(6) > a")
       .click()
       .wait(500);
-    cy.visit(urlMain);
   });
 });
