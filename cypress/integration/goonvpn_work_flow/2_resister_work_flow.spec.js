@@ -8,7 +8,6 @@ const pass = "11442525";
 
 describe("Work flow : Register", () => {
   beforeEach("go to URL.", () => {
-    cy.visit(urlMain).contains("หน้าแรก");
     cy.get(":nth-child(2) > .btn-topbar").click();
     cy.url().should("include", "signup");
   });
