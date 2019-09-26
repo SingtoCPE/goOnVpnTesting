@@ -104,6 +104,53 @@ describe("Work flow : Register", () => {
       .should("contain", "กรุณากรอกอีเมลล์ของท่าน")
       .and("contain", "กรุณากรอกรหัสผ่านของท่าน");
   });
+
+  it("Register : Failed, User Email and Password empty case ", () => {
+    cy.get("#signupform-username")
+      .should("have.id", "signupform-username")
+      .click()
+    cy.get("#signupform-email")
+      .should("have.id", "signupform-email")
+      .click()
+    cy.get("#signupform-password")
+      .should("have.id", "signupform-password")
+      .click()
+    cy.get(".field-signupform-email > .control-label").click();
+    cy.get('[class="help-block"]')
+      .should("contain", "กรุณากรอกชื่อผู้ใช้งาน")
+      .and("contain", "กรุณากรอกอีเมลล์ของท่าน")
+      .and("contain", "กรุณากรอกรหัสผ่านของท่าน");
+  });
+
+  it("Register : Failed, Email invalid case ", () => {
+    cy.get("#signupform-username")
+      .should("have.id", "signupform-username")
+      .type(user)
+      cy.get("#signupform-password")
+      .should("have.id", "signupform-password")
+      .type(pass)
+      cy.get("#signupform-email")
+        .should("have.id", "signupform-email")
+        .type('aaa')
+    cy.get(".field-signupform-email > .control-label").click();
+    cy.get('[class="help-block"]')
+      .should("contain", "อีเมลล์ ไม่ถูกต้อง")
+  });
+
+  it("Register : Failed, Password invalid case ", () => {
+    cy.get("#signupform-username")
+      .should("have.id", "signupform-username")
+      .type(user)
+      cy.get("#signupform-email")
+        .should("have.id", "signupform-email")
+        .type(email)
+      cy.get("#signupform-password")
+      .should("have.id", "signupform-password")
+      .type('pass')
+    cy.get(".field-signupform-email > .control-label").click();
+    cy.get('[class="help-block"]')
+      .should("contain", "รหัสผ่านต้องมากกว่า 6 ตัวอักษร")
+  });
   // it("Register : Complete", () => {
   //   cy.get("#signupform-username")
   //     .type("singto1144", { delay: 20 });
