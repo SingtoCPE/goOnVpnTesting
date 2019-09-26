@@ -63,43 +63,61 @@ describe("Work flow : Main page ", () => {
       .should("contain.text", " คลิ๊กเพื่อดูรายชื่อเกมส์ทั้งหมด")
       .click();
   });
-  // // --------------------------------------------------------------------------------
-  // it("work flow : BLOG & FEATURES bar", () => {
-  //   cy.get(".wrap > :nth-child(12)")
-  //   cy.get(":nth-child(1) > .news-desc > .blogs-description > .text-danger")
-  //     .click()
-  //   cy.visit(urlMain);
-  //   cy.get(".wrap > :nth-child(12)")
-  //   cy.get(":nth-child(2) > .news-desc > .blogs-description > .text-danger")
-  //     .click()
-  //   cy.visit(urlMain);
-  //   cy.get(".wrap > :nth-child(12)")
-  //   cy.get(":nth-child(3) > .news-desc > .blogs-description > .text-danger")
-  //     .click()
-  //   cy.visit(urlMain);
-  //   cy.get(".wrap > :nth-child(12)")
-  //   cy.get(":nth-child(3) > .col-md-12 > .text-center > .btn")
-  //     .click()
-  // });
-  // it("work flow : footer bar", () => {
-  //   cy.get("footer")
-  //     .scrollIntoView()
-  //   cy.get(".list-unstyled > :nth-child(1) > a")
-  //     .click()
-  //   cy.visit(urlMain);
-  //   cy.get(".list-unstyled > :nth-child(2) > a")
-  //     .click()
-  //   cy.visit(urlMain);
-  //   cy.get(".list-unstyled > :nth-child(3) > a")
-  //     .click()
-  //   cy.visit(urlMain);
-  //   cy.get(".list-unstyled > :nth-child(4) > a")
-  //     .click()
-  //   cy.visit(urlMain);
-  //   cy.get(".list-unstyled > :nth-child(5) > a")
-  //     .click()
-  //   cy.visit(urlMain);
-  //   cy.get(".list-unstyled > :nth-child(6) > a")
-  //     .click()
-  // });
+  // --------------------------------------------------------------------------------
+  it("work flow : BLOG & FEATURES bar", () => {
+    cy.get('[class="blog-home-title"]')
+      .contains("Overkill’s The Walking Dead เตรียมเปิด Closed Bata บน PC")
+      .should(
+        "contain.text",
+        "Overkill’s The Walking Dead เตรียมเปิด Closed Bata บน PC"
+      )
+      .click();
+    cy.visit(urlMain);
+
+    cy.get('[class="blog-home-title"]')
+      .contains(
+        "Overcooked 2 เปิดให้บริการแล้ววันนี้ทั้ง PC และ เครื่องเล่นคอนโซล"
+      )
+      .should(
+        "contain.text",
+        "Overcooked 2 เปิดให้บริการแล้ววันนี้ทั้ง PC และ เครื่องเล่นคอนโซล"
+      )
+      .click();
+    cy.visit(urlMain);
+
+    cy.get('[class="blog-home-title"]')
+      .contains("Fallout Shelter Online CN พร้อมเปิดทดสอบตัวเกมส์ในเร็วๆนี้")
+      .should(
+        "contain.text",
+        "Fallout Shelter Online CN พร้อมเปิดทดสอบตัวเกมส์ในเร็วๆนี้"
+      )
+      .click();
+  });
+
+  it("work flow : footer bar", () => {
+    cy.get('[class="list-unstyled"]');
+    cy.get("footer")
+      .should("contain.text", " ตรวจสอบไอพี")
+      .click();
+    cy.visit(urlMain);
+    cy.get(".list-unstyled > :nth-child(2) > a")
+      .should("contain.text", " วิธีแจ้งโอนเงิน")
+      .click();
+    cy.visit(urlMain);
+    cy.get(".list-unstyled > :nth-child(3) > a")
+      .should("contain.text", " วิธีเติม GP ด้วยทรูมันนี่")
+      .click();
+    cy.visit(urlMain);
+    cy.get(".list-unstyled > :nth-child(4) > a")
+      .should("contain.text", " วิธีการเติมวัน")
+      .click();
+    cy.visit(urlMain);
+    cy.get(".list-unstyled > :nth-child(5) > a")
+      .should("contain.text", " ตอบ-ถามปัญหาการใช้งาน")
+      .click();
+    cy.visit(urlMain);
+    cy.get(".list-unstyled > :nth-child(6) > a")
+      .should("contain.text", " Blog & Feature")
+      .click();
+  });
 });
