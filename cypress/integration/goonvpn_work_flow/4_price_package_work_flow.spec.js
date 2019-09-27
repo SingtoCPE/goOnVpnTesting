@@ -1,20 +1,34 @@
 /// <reference types = 'cypress'/>
 
-const urlMain = "https://www.goonvpn.com/";
-
 describe("Work flow : Price and package", () => {
   beforeEach("Go to Price and package.", () => {
-    cy.setCookie(
-      "_identity",
-      "14bd1e44832aa71ac1555d838164fce36e7ea3b812e9155d148c2ef8d0d1f3aca%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A50%3A%22%5B57856%2C%22ptrcRZnG37LiJnIATMxs5QV5O6CXCGE7%22%2C2592000%5D%22%3B%7D"
-    );
-    cy.visit(urlMain);
-    cy.url().should("include", "/");
-    cy.get('[class="nav navbar-nav navbar-right"]')
-    .contains('ราคา และ แพ็กเกจ')
-    .click()
+    cy.beforeEachPrice() //command
   });
-  it('Work flow: ดูเลขที่บัญชี',()=>{
 
-  })
+  it("Work flow: ดูเลขที่บัญชี > รับวันทดลองฟรี", () => {
+    cy.mainPrice() //command
+    cy.get('[class="special btn-get-trial"]')
+      .contains(" รับวันทดลองใช้งานฟรี!")
+      .should("have.attr", "href", "/promotion/get-trial")
+      .click();
+    cy.url().should("include", "/get-trial");
+  });
+
+  it("Work flow: ดูเลขที่บัญชี > เติมวันใช้งาน", () => {
+    cy.mainPrice()
+    cy.get('[class="special btn-airtime"]')
+      .contains(" เติมวันใช้งาน")
+      .should("have.attr", "href", "/airtime-package")
+      .click();
+    cy.url().should("include", "/airtime-package");
+    cy.get('[class="hvr-bounce-in btn btn-primary btn-block btn-topup-time"]')
+      .contains("เติมวัน")
+      .should("have.attr", "href", "/confirm-topup/1")
+      .click();
+      cy.url().should("include", "/confirm-topup/1");
+      cy.get('[class="btn btn-danger btn-sm btn-topup-time"]')
+      .contains(' เติม GP')
+      .should('have.attr','href','/how-to-pay')
+      .click()
+  });
 });

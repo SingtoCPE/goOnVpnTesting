@@ -8,9 +8,8 @@ const pass = "11442525";
 
 describe("Work flow : Login", () => {
   beforeEach("go to URL.", () => {
-    cy.get(":nth-child(1) > .btn-topbar").click();
-    cy.url().should("include", "login");
-  });
+    cy.beforeEachLogin()
+  })
 
   it("Login : Failed,User field empty case", () => {
   //   cy.get("#loginform-password")
