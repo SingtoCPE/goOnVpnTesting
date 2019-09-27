@@ -6,7 +6,7 @@ describe("Work flow : Price and package", () => {
   });
 
   it("Work flow: ดูเลขที่บัญชี > รับวันทดลองฟรี", () => {
-    cy.mainPrice() //command
+    cy.viewAccountNumber() //command
     cy.get('[class="special btn-get-trial"]')
       .contains(" รับวันทดลองใช้งานฟรี!")
       .should("have.attr", "href", "/promotion/get-trial")
@@ -15,7 +15,7 @@ describe("Work flow : Price and package", () => {
   });
 
   it("Work flow: ดูเลขที่บัญชี > เติมวันใช้งาน", () => {
-    cy.mainPrice()
+    cy.viewAccountNumber()
     cy.get('[class="special btn-airtime"]')
       .contains(" เติมวันใช้งาน")
       .should("have.attr", "href", "/airtime-package")

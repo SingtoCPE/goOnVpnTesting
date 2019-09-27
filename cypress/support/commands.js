@@ -1,5 +1,8 @@
 const urlLogin = "https://www.goonvpn.com/my-account";
 const urlMain = "https://www.goonvpn.com/";
+const user = "singto1144";
+const email = "lion_king_1144@hotmail.com";
+const pass = "11442525";
 
 //----------------------------- Mainpage --------------------------
 // beforeEach Mainpage ---
@@ -24,10 +27,42 @@ Cypress.Commands.add("beforeEachRegister", () => {
     .click();
   cy.url().should("include", "signup");
 });
-// User Empty
-Cypress.Commands.add("userEmpty", () => {
+// Emptry Case -----
+// user
+Cypress.Commands.add("userRegister", () => {
   cy.get("#signupform-username")
     .should("have.id", "signupform-username")
+    .type(user, { delay: 20 });
+});
+// Email
+Cypress.Commands.add("emailRegister", () => {
+  cy.get("#signupform-email")
+    .should("have.id", "signupform-email")
+    .type(email, { delay: 20 });
+});
+// Password
+Cypress.Commands.add("passwordRegister", () => {
+  cy.get("#signupform-password")
+    .should("have.id", "signupform-password")
+    .type(pass, { delay: 20 });
+});
+// Non-Emptry Case -----
+// user Empty
+Cypress.Commands.add("userRegisterEmpty", () => {
+  cy.get("#signupform-username")
+    .should("have.id", "signupform-username")
+    .click();
+});
+// Email Empty
+Cypress.Commands.add("emailRegisterEmpty", () => {
+  cy.get("#signupform-email")
+    .should("have.id", "signupform-email")
+    .click();
+});
+// Password Empty
+Cypress.Commands.add("passwordRegisterEmpty", () => {
+  cy.get("#signupform-password")
+    .should("have.id", "signupform-password")
     .click();
 });
 
@@ -41,6 +76,32 @@ Cypress.Commands.add("beforeEachLogin", () => {
     .should("have.attr", "href", "/login")
     .click();
   cy.url().should("include", "login");
+});
+// Emptry Case -----
+// user
+Cypress.Commands.add("userLogin", () => {
+  cy.get("#loginform-username")
+    .should("have.id", "loginform-username")
+    .type(user, { delay: 20 });
+});
+// Password
+Cypress.Commands.add("passwordLogin", () => {
+  cy.get("#loginform-password")
+    .should("have.id", "loginform-password")
+    .type(pass, { delay: 20 });
+});
+// Non-Emptry Case -----
+// user Empty
+Cypress.Commands.add("userLoginEmpty", () => {
+  cy.get("#loginform-username")
+    .should("have.id", "loginform-username")
+    .click();
+});
+// Password Empty
+Cypress.Commands.add("passwordLoginEmpty", () => {
+  cy.get("#loginform-password")
+    .should("have.id", "loginform-password")
+    .click();
 });
 
 //----------------------------- Price and package --------------------------
@@ -57,11 +118,29 @@ Cypress.Commands.add("beforeEachPrice", () => {
     .click();
 });
 
-// Main Price ---
-Cypress.Commands.add("mainPrice", () => {
+// Main Price -----
+Cypress.Commands.add("viewAccountNumber", () => {
   cy.get('[class="btn border-theme btn-block col-xs-12"]')
     .contains(" ดูเลขที่บัญชี")
     .should("have.attr", "href", "/how-to-pay")
     .click();
   cy.url().should("include", "/how-to-pay");
+});
+//---------------------- function ---------------------------------
+Cypress.Commands.add("mainPrice", () => {
+  cy.viewAccountNumber()
+    cy.get('[class="special btn-airtime"]')
+      .contains(" เติมวันใช้งาน")
+      .should("have.attr", "href", "/airtime-package")
+      .click();
+    cy.url().should("include", "/airtime-package");
+    cy.get('[class="hvr-bounce-in btn btn-primary btn-block btn-topup-time"]')
+      .contains("เติมวัน")
+      .should("have.attr", "href", "/confirm-topup/1")
+      .click();
+      cy.url().should("include", "/confirm-topup/1");
+      cy.get('[class="btn btn-danger btn-sm btn-topup-time"]')
+      .contains(' เติม GP')
+      .should('have.attr','href','/how-to-pay')
+      .click()
 });
