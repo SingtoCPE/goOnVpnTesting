@@ -209,26 +209,41 @@ Cypress.Commands.add("loopSelectPaypal", () => {
 
 // select แจ้งโอนเงิน
 Cypress.Commands.add("loopSelectTransfer", () => {
-  cy.get('[class="sub-menu"]')
-    .contains(" แจ้งโอนเงิน")
-    .click();
-  cy.url().should("include", "/deposit-notify");
-  cy.get('[class="btn border-theme animated shake"]')
-    .contains(" บัญชีธนาคารที่รองรับ")
-    .and("have.text", " บัญชีธนาคารที่รองรับ")
-    .and("have.attr", "href", "/how-to-pay")
-    .click();
-  cy.get('[class="sub-menu"]')
-    .contains(" แจ้งโอนเงิน")
-    .click();
-  cy.url().should("include", "/deposit-notify");
-  cy.get('[class="select2-selection select2-selection--single"]')
-    .click()
-    .get('[class="select2-results"]')
-    .children()
-    .children();
-    cy.get('[class="select2-results__options"]>li').each($list => {
-      console.log($list.get(0).innerText)
-     })
-  // .click();
+  const child = [
+    "ธนาคารกสิกรไทย - 095-2-96230-4",
+    "ธนาคารไทยพานิชย์ - 211-2-20718-4",
+    "ธนาคารกรุงเทพ - 008-8-02268-6",
+    "ธนาคารกรุงไทย - 762-0-47162-6",
+    "ธนาคารทหารไทย - 217-2-49020-9",
+    "ธนาคารกรุงศรีอยุธยา - 449-1-72937-4"
+  ];
+  for (let i in child) {
+    cy.get('[class="sub-menu"]')
+      .contains(" แจ้งโอนเงิน")
+      .click();
+    cy.url().should("include", "/deposit-notify");
+    cy.get('[class="btn border-theme animated shake"]')
+      .contains(" บัญชีธนาคารที่รองรับ")
+      .and("have.text", " บัญชีธนาคารที่รองรับ")
+      .and("have.attr", "href", "/how-to-pay")
+      .click();
+    cy.get('[class="sub-menu"]')
+      .contains(" แจ้งโอนเงิน")
+      .click();
+    cy.url().should("include", "/deposit-notify");
+    cy.get('[class="select2-selection select2-selection--single"]')
+      .click()
+      .get('[class="select2-results"]')
+      .children()
+      .children()
+      .contains(child[i])
+      .and("have.text", child[i])
+      .click();
+    cy.get('[class="form-control krajee-datepicker"]').click();
+    cy.get('[data-date="1568505600000"]').click();
+    cy.get("#depositform-amount").type("100");
+    cy.get("#depositform-note").type("Test by cypress");
+    cy.get('[class="btn btn-theme-bg hvr-grow-shadow"]').click();
+    cy.get('[class="confirm"]').click();
+  }
 });
