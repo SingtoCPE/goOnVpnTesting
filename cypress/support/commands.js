@@ -7,7 +7,9 @@ const pass = "11442525";
 //----------------------------- Mainpage --------------------------
 // beforeEach Mainpage ---
 Cypress.Commands.add("beforeEachMainpage", () => {
-  cy.visit(urlMain).contains("หน้าแรก");
+  cy.visit(urlMain)
+    .contains("หน้าแรก")
+    .wait(500);
   cy.url().should("include", "/");
 });
 // tagH4 ข่าวและโปรโมชั่น
@@ -19,7 +21,7 @@ Cypress.Commands.add("tagH4", () => {
 //----------------------------- Register --------------------------
 // beforeEach Main Register Page ---
 Cypress.Commands.add("beforeEachRegister", () => {
-  cy.visit(urlMain);
+  cy.visit(urlMain).wait(500);
   cy.url().should("include", "/");
   cy.get('[class="btn-topbar signup"]')
     .contains(" สมัครสมาชิก")
@@ -69,7 +71,7 @@ Cypress.Commands.add("passwordRegisterEmpty", () => {
 //----------------------------- Login --------------------------
 // beforeEach Main Login Page ---
 Cypress.Commands.add("beforeEachLogin", () => {
-  cy.visit(urlMain);
+  cy.visit(urlMain).wait(500);
   cy.url().should("include", "/");
   cy.get('[class="btn-topbar login"]')
     .contains(" เข้าสู่ระบบ")
@@ -107,7 +109,7 @@ Cypress.Commands.add("passwordLoginEmpty", () => {
 //----------------------------- Price and package --------------------------
 // beforeEach Main Price Page ---
 Cypress.Commands.add("beforeEachPrice", () => {
-  cy.visit(urlMain);
+  cy.visit(urlMain).wait(500);
   cy.setCookie(
     "_identity",
     "14bd1e44832aa71ac1555d838164fce36e7ea3b812e9155d148c2ef8d0d1f3aca%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A50%3A%22%5B57856%2C%22ptrcRZnG37LiJnIATMxs5QV5O6CXCGE7%22%2C2592000%5D%22%3B%7D"
@@ -122,25 +124,79 @@ Cypress.Commands.add("beforeEachPrice", () => {
 Cypress.Commands.add("viewAccountNumber", () => {
   cy.get('[class="btn border-theme btn-block col-xs-12"]')
     .contains(" ดูเลขที่บัญชี")
-    .should("have.attr", "href", "/how-to-pay")
     .click();
-  cy.url().should("include", "/how-to-pay");
 });
+
+Cypress.Commands.add("topupTruemoney", () => {
+  cy.viewAccountNumber();
+  cy.get('[class="sub-menu"]')
+    .contains("เติม GP ด้วยบัตรทรูมันนี่​")
+    .and("have.text", " เติม GP ด้วยบัตรทรูมันนี่​")
+    .click();
+  cy.url().should("include", "/payment-truemoney");
+});
+
 //---------------------- function ---------------------------------
-Cypress.Commands.add("mainPrice", () => {
-  cy.viewAccountNumber()
+// loop เติมวันใช้งาน
+Cypress.Commands.add("loopClickTopupGP", () => {
+  for (let i = 1; i < 10; i++) {
     cy.get('[class="special btn-airtime"]')
       .contains(" เติมวันใช้งาน")
       .should("have.attr", "href", "/airtime-package")
+      .and("have.text", " เติมวันใช้งาน")
       .click();
-    cy.url().should("include", "/airtime-package");
-    cy.get('[class="hvr-bounce-in btn btn-primary btn-block btn-topup-time"]')
+    cy.get(`:nth-child(${i === 9 ? i - 1 : i}) > .cost-box > .hvr-bounce-in`)
       .contains("เติมวัน")
-      .should("have.attr", "href", "/confirm-topup/1")
+      .should(
+        "have.attr",
+        "href",
+        `/confirm-topup/${i === 7 ? (i = i + 1) : i}`
+      )
       .click();
-      cy.url().should("include", "/confirm-topup/1");
-      cy.get('[class="btn btn-danger btn-sm btn-topup-time"]')
-      .contains(' เติม GP')
-      .should('have.attr','href','/how-to-pay')
-      .click()
+    cy.url().should("include", `/confirm-topup/${i === 7 ? (i = i + 1) : i}`);
+    cy.get('[class="btn btn-danger btn-sm btn-topup-time"]')
+      .contains(" เติม GP")
+      .and("have.text", " เติม GP")
+      .click();
+  }
 });
+// loop ยกเลิกการเติมวัน
+Cypress.Commands.add("loopClickCancel", () => {
+  for (let i = 1; i < 10; i++) {
+    cy.get(".btn-airtime > a")
+      .contains(" เติมวันใช้งาน")
+      .should("have.attr", "href", "/airtime-package")
+      .and("have.text", " เติมวันใช้งาน")
+      .click();
+    cy.get(`:nth-child(${i === 9 ? i - 1 : i}) > .cost-box > .hvr-bounce-in`)
+      .contains("เติมวัน")
+      .should(
+        "have.attr",
+        "href",
+        `/confirm-topup/${i === 7 ? (i = i + 1) : i}`
+      )
+      .click();
+    cy.url().should("include", `/confirm-topup/${i === 7 ? (i = i + 1) : i}`);
+    cy.get('[class="btn btn-warning btn-sm btn-topup-time"]')
+      .contains(" ยกเลิก")
+      .and("have.text", " ยกเลิก")
+      .click();
+  }
+});
+  // select ชำระผ่าน paypal
+Cypress.Commands.add("loopSelectPaypal", () => {
+  const price = [100,150,300,500,1000,1200]
+  const GP =[110,165,330,550,1100,1320]
+  for(let i in price){
+  cy.get(":nth-child(2) > .sub-menu > :nth-child(2) > a")
+      .contains(" ชำระผ่าน PayPal")
+      .and("have.attr", "href", "/payment-paypal")
+      .click();
+    cy.get('[class="select2-selection select2-selection--single"]')
+      .click()
+      .get('[class="select2-results"]')
+      .contains(` ${price[i]} บาท   => ได้รับ ${GP[i]}GP`)
+      .click();
+  }
+});
+
