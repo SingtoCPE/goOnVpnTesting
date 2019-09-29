@@ -126,7 +126,7 @@ Cypress.Commands.add("viewAccountNumber", () => {
     .contains(" ดูเลขที่บัญชี")
     .click();
 });
-
+// loop + function เติม GP ด้วยบัตรทรูมันนี่
 Cypress.Commands.add("topupTruemoney", () => {
   cy.viewAccountNumber();
   cy.get('[class="sub-menu"]')
@@ -183,20 +183,26 @@ Cypress.Commands.add("loopClickCancel", () => {
       .click();
   }
 });
-  // select ชำระผ่าน paypal
+// select ชำระผ่าน paypal
 Cypress.Commands.add("loopSelectPaypal", () => {
-  const price = [100,150,300,500,1000,1200]
-  const GP =[110,165,330,550,1100,1320]
-  for(let i in price){
-  cy.get(":nth-child(2) > .sub-menu > :nth-child(2) > a")
+  const price = [100, 150, 300, 500, 1000, 1200];
+  const GP = [110, 165, 330, 550, 1100, 1320];
+
+  for (let i in price) {
+    let text = `${price[i]} บาท   => ได้รับ ${GP[i]}GP`;
+    let text2 = ` ${price[i]} บาท   => ได้รับ ${GP[i]}GP`;
+    cy.get(":nth-child(2) > .sub-menu > :nth-child(2) > a")
       .contains(" ชำระผ่าน PayPal")
       .and("have.attr", "href", "/payment-paypal")
       .click();
     cy.get('[class="select2-selection select2-selection--single"]')
       .click()
       .get('[class="select2-results"]')
-      .contains(` ${price[i]} บาท   => ได้รับ ${GP[i]}GP`)
+      .contains(i >= 4 ? text : text2)
       .click();
+    cy.get('[class="hvr-grow-shadow btn btn-theme-bg"]')
+      .should("contain.text", " เติม GP")
+      .click()
+    cy.visit(urlMain).wait(500);
   }
 });
-
