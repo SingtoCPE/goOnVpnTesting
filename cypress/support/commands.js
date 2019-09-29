@@ -202,7 +202,33 @@ Cypress.Commands.add("loopSelectPaypal", () => {
       .click();
     cy.get('[class="hvr-grow-shadow btn btn-theme-bg"]')
       .should("contain.text", " เติม GP")
-      .click()
+      .click();
     cy.visit(urlMain).wait(500);
   }
+});
+
+// select แจ้งโอนเงิน
+Cypress.Commands.add("loopSelectTransfer", () => {
+  cy.get('[class="sub-menu"]')
+    .contains(" แจ้งโอนเงิน")
+    .click();
+  cy.url().should("include", "/deposit-notify");
+  cy.get('[class="btn border-theme animated shake"]')
+    .contains(" บัญชีธนาคารที่รองรับ")
+    .and("have.text", " บัญชีธนาคารที่รองรับ")
+    .and("have.attr", "href", "/how-to-pay")
+    .click();
+  cy.get('[class="sub-menu"]')
+    .contains(" แจ้งโอนเงิน")
+    .click();
+  cy.url().should("include", "/deposit-notify");
+  cy.get('[class="select2-selection select2-selection--single"]')
+    .click()
+    .get('[class="select2-results"]')
+    .children()
+    .children();
+    cy.get('[class="select2-results__options"]>li').each($list => {
+      console.log($list.get(0).innerText)
+     })
+  // .click();
 });
