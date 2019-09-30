@@ -207,7 +207,7 @@ Cypress.Commands.add("loopSelectPaypal", () => {
   }
 });
 
-// select แจ้งโอนเงิน
+// form แจ้งโอนเงินสำเร็จ
 Cypress.Commands.add("loopSelectTransfer", () => {
   const child = [
     "ธนาคารกสิกรไทย - 095-2-96230-4",
@@ -240,10 +240,62 @@ Cypress.Commands.add("loopSelectTransfer", () => {
       .and("have.text", child[i])
       .click();
     cy.get('[class="form-control krajee-datepicker"]').click();
-    cy.get('[data-date="1568505600000"]').click();
+    cy.get('[data-date="1568505600000"]')
+      .should("have.text", "15")
+      .click();
     cy.get("#depositform-amount").type("100");
     cy.get("#depositform-note").type("Test by cypress");
-    cy.get('[class="btn btn-theme-bg hvr-grow-shadow"]').click();
-    cy.get('[class="confirm"]').click();
+    cy.get('[class="btn btn-theme-bg hvr-grow-shadow"]')
+      .contains(" แจ้งโอนเงิน")
+      .click()
+      .should("have.text", " แจ้งโอนเงิน")
+      .should("have.attr", "name")
+      .and("eq", "inform-button");
+    cy.get('[class="confirm"]')
+      .should("have.text", "ยืนยัน")
+      .click();
   }
+});
+
+// form แจ้งโอนเงินไม่สำเร็จ
+Cypress.Commands.add("loopSelectTransferInvalid", () => {
+  cy.get('[class="sub-menu"]')
+    .contains(" แจ้งโอนเงิน")
+    .click();
+  cy.url().should("include", "/deposit-notify");
+  cy.get('[class="btn border-theme animated shake"]')
+    .contains(" บัญชีธนาคารที่รองรับ")
+    .and("have.text", " บัญชีธนาคารที่รองรับ")
+    .and("have.attr", "href", "/how-to-pay")
+    .click();
+  cy.get('[class="sub-menu"]')
+    .contains(" แจ้งโอนเงิน")
+    .click();
+  cy.url().should("include", "/deposit-notify");
+  cy.get('[class="select2-selection select2-selection--single"]')
+    .click()
+    .get('[class="select2-results"]')
+    .children()
+    .children()
+    .contains("ธนาคารกสิกรไทย - 095-2-96230-4")
+    .and("have.text", "ธนาคารกสิกรไทย - 095-2-96230-4")
+    .click();
+  cy.get('[class="form-control krajee-datepicker"]')
+    .click()
+    .type(" ");
+  cy.get(".site-pay-inform > :nth-child(4)").dblclick();
+  cy.get("#depositform-amount").dblclick();
+  cy.get(".site-pay-inform > :nth-child(4)").dblclick();
+  cy.get('[class="btn btn-theme-bg hvr-grow-shadow"]')
+    .contains(" แจ้งโอนเงิน")
+    .click()
+    .should("have.text", " แจ้งโอนเงิน")
+    .should("have.attr", "name")
+    .and("eq", "inform-button");
+  cy.get('[class="help-block"]')
+    .contains("กรุณากรอก วันที่โอน")
+    .and("have.text", "กรุณากรอก วันที่โอน");
+  cy.get('[class="help-block"]')
+    .contains("กรุณากรอก จำนวนเงินที่โอน")
+    .and("have.text", "กรุณากรอก จำนวนเงินที่โอน");
 });

@@ -61,8 +61,13 @@ describe("Work flow : Price and package", () => {
   // // - ต้องลองจ่ายแบบ paypal
   //   });
 
-  it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลการชำระเงินผิด", () => {
+  // it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลแจ้งโอนเงินสำเร็จ", () => {
+  //   cy.viewAccountNumber(); // commands
+  //   cy.loopSelectTransfer()
+  // });
+
+  it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลแจ้งโอนเงินไม่สำเร็จ", () => {
     cy.viewAccountNumber(); // commands
-    cy.loopSelectTransfer()
+    cy.loopSelectTransferInvalid()
   });
 });
