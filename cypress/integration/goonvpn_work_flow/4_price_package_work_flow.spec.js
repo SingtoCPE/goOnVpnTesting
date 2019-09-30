@@ -47,27 +47,27 @@ describe("Work flow : Price and package", () => {
 
   //   });
 
-  //   it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  ชำระผ่าน PayPal > กรอก ข้อมูลการชำระเงินผิด", () => {
+  //   it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  ชำระผ่าน PayPal > กรอก ข้อมูลการชำระเงินไม่สำเร็จ", () => {
   //     cy.viewAccountNumber(); // commands
   //     cy.loopSelectPaypal(); // commands
   // // - ติดปัญหากดแล้วเด้งไปหน้าอื่น
   // // - ต้องลองจ่ายแบบ paypal
   //   });
 
-  //   it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  ชำระผ่าน PayPal > กรอก ข้อมูลการชำระเงินถูก", () => {
+  //   it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  ชำระผ่าน PayPal > กรอก ข้อมูลการชำระเงินสำเร็จ", () => {
   //     cy.viewAccountNumber(); // commands
   //     cy.loopSelectPaypal(); // commands
   // // - ติดปัญหากดแล้วเด้งไปหน้าอื่น
   // // - ต้องลองจ่ายแบบ paypal
   //   });
 
-  // it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลแจ้งโอนเงินสำเร็จ", () => {
-  //   cy.viewAccountNumber(); // commands
-  //   cy.loopSelectTransfer()
-  // });
-
-  it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลแจ้งโอนเงินไม่สำเร็จ", () => {
+  it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลแจ้งโอนเงินสำเร็จ", () => {
     cy.viewAccountNumber(); // commands
-    cy.loopSelectTransferInvalid()
+    cy.loopSelectTransfer()
   });
+
+  // it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลแจ้งโอนเงินไม่สำเร็จ", () => {
+  //   cy.viewAccountNumber(); // commands
+  //   cy.loopSelectTransferInvalid()
+  // });
 });

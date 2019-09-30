@@ -200,10 +200,9 @@ Cypress.Commands.add("loopSelectPaypal", () => {
       .get('[class="select2-results"]')
       .contains(i >= 4 ? text : text2)
       .click();
-    cy.get('[class="hvr-grow-shadow btn btn-theme-bg"]')
-      .should("contain.text", " เติม GP")
-      .click();
-    cy.visit(urlMain).wait(500);
+    // cy.get('[class="hvr-grow-shadow btn btn-theme-bg"]')
+    //   .should("contain.text", " เติม GP")
+    //   .click();
   }
 });
 
@@ -245,6 +244,15 @@ Cypress.Commands.add("loopSelectTransfer", () => {
       .click();
     cy.get("#depositform-amount").type("100");
     cy.get("#depositform-note").type("Test by cypress");
+    cy.get('[class="btn btn-theme-bg hvr-grow-shadow"]')
+      .contains(" แจ้งโอนเงิน")
+      .click()
+      .should("have.text", " แจ้งโอนเงิน")
+      .should("have.attr", "name")
+      .and("eq", "inform-button");
+    cy.get('[class="cancel"]')
+      .should("have.text", "แก้ไขใหม่")
+      .click();
     cy.get('[class="btn btn-theme-bg hvr-grow-shadow"]')
       .contains(" แจ้งโอนเงิน")
       .click()
