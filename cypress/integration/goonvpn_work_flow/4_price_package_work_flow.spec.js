@@ -61,13 +61,29 @@ describe("Work flow : Price and package", () => {
   // // - ต้องลองจ่ายแบบ paypal
   //   });
 
-  it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลแจ้งโอนเงินสำเร็จ", () => {
-    cy.viewAccountNumber(); // commands
-    cy.loopSelectTransfer()
-  });
+  // it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลแจ้งโอนเงินสำเร็จ", () => {
+  //   cy.viewAccountNumber(); // commands
+  //   cy.loopSelectTransfer()
+  // });
 
   // it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  แจ้งโอนเงิน > กรอก ข้อมูลแจ้งโอนเงินไม่สำเร็จ", () => {
   //   cy.viewAccountNumber(); // commands
   //   cy.loopSelectTransferInvalid()
   // });
+
+  // it('Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ > ช่องทางการเติม GP',() => {
+  //   cy.viewAccountNumber(); // commands
+  //   cy.get('[class="sub-menu"]')
+  //     .contains(' ช่องทางการเติม GP')
+  //     .should('have.text',' ช่องทางการเติม GP')
+  //     .and('have.attr','href','/how-to-pay')
+  //     .click()
+  // })
+
+  it('Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ > ข้อมูลผู้ใช้',() => {
+    cy.viewAccountNumber(); // commands
+    cy.get(':nth-child(3) > .sub-menu > :nth-child(1) > a')
+    .contains(' ข้อมูลผู้ใช้')
+    .should('have.attr','href','/my-account')
+  })
 });
