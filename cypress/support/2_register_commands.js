@@ -1,6 +1,7 @@
 //----------------------------- Register --------------------------
 // beforeEach Main Register Page ---
 Cypress.Commands.add("beforeEachRegister", () => {
+  cy.clearCookies()
   cy.visit(Cypress.env('URLMAIN')).wait(500);
   cy.url().should("include", "/");
   cy.get('[class="btn-topbar signup"]')

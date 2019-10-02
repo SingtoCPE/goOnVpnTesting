@@ -1,11 +1,11 @@
 //----------------------------- Price and package --------------------------
 // beforeEach Main Price Page ---
 Cypress.Commands.add("beforeEachPrice", () => {
-  cy.visit(Cypress.env("URLMAIN")).wait(500);
   cy.setCookie(
     "_identity",
     "14bd1e44832aa71ac1555d838164fce36e7ea3b812e9155d148c2ef8d0d1f3aca%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A50%3A%22%5B57856%2C%22ptrcRZnG37LiJnIATMxs5QV5O6CXCGE7%22%2C2592000%5D%22%3B%7D"
   );
+  cy.visit(Cypress.env("URLMAIN")).wait(500);
   cy.url().should("include", "/");
   cy.get('[class="nav navbar-nav navbar-right"]')
     .contains("ราคา และ แพ็กเกจ")
@@ -31,20 +31,20 @@ Cypress.Commands.add("topupTruemoney", () => {
 // เปลี่ยนรหัสผ่านสำเร็จ
 Cypress.Commands.add("changePasswordComplete", () => {
   cy.get("#passwordchangeform-currentpasswd")
-    .type(Cypress.env("NEWPASS"))
+    .type(Cypress.env("PASS"))
     .should("have.attr", "name")
     .and("eq", "PasswordChangeForm[currentPasswd]");
   cy.get("#passwordchangeform-newpasswd")
-    .type(Cypress.env("PASS"))
+    .type(Cypress.env("NEWPASS"))
     .should("have.attr", "name")
     .and("eq", "PasswordChangeForm[newPasswd]");
   cy.get("#passwordchangeform-verifypasswd")
-    .type(Cypress.env("PASS"))
+    .type(Cypress.env("NEWPASS"))
     .should("have.attr", "name")
     .and("eq", "PasswordChangeForm[verifyPasswd]");
   cy.get(":nth-child(5) > .btn")
     .contains("เปลี่ยนรหัสผ่าน")
-    .click();    
+    .click();
 });
 
 // เปลี่ยนรหัสผ่านไม่สำเร็จ
@@ -63,9 +63,11 @@ Cypress.Commands.add("changePasswordInvalid", () => {
     .and("eq", "PasswordChangeForm[verifyPasswd]");
   cy.get(":nth-child(5) > .btn")
     .contains("เปลี่ยนรหัสผ่าน")
-    .click();   
-    cy.get('[class="help-block help-block-error"]') 
-    .and('have.text','รหัสผ่านปัจจุบันของท่านไม่ถูกต้อง')
+    .click();
+  cy.get('[class="help-block help-block-error"]').and(
+    "have.text",
+    "รหัสผ่านปัจจุบันของท่านไม่ถูกต้อง"
+  );
 });
 
 //---------------------- Loop ---------------------------------
