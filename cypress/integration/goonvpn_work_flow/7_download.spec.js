@@ -11,7 +11,6 @@ describe("Work flow : Download", () => {
       .should("have.attr", "href", "/download/go-connect")
       .contains("ดาวน์โหลด")
       .click();
-    Cypress.config("pageLoadTimeout");
   });
 
   it("Work flow : Download > download for window > Softether VPN Client", async () => {
