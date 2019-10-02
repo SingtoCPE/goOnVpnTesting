@@ -87,31 +87,23 @@ describe("Work flow : Price and package", () => {
   //     .should("have.attr", "href", "/my-account");
   // });
 
-  it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ > เปลี่ยนรหัสผ่านสำเร็จ", () => {
+  // it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ > เปลี่ยนรหัสผ่านสำเร็จ", () => {
+  //   cy.viewAccountNumber(); // commands
+  //   cy.get(":nth-child(3) > .sub-menu > :nth-child(2) > a")
+  //     .contains(" เปลี่ยนรหัสผ่าน")
+  //     .should("have.text", " เปลี่ยนรหัสผ่าน")
+  //     .and("have.attr", "href", "/change-password")
+  //     .click();
+  //   cy.changePasswordComplete();
+  // });
+
+  it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ > เปลี่ยนรหัสผ่านไม่สำเร็จ", () => {
     cy.viewAccountNumber(); // commands
     cy.get(":nth-child(3) > .sub-menu > :nth-child(2) > a")
       .contains(" เปลี่ยนรหัสผ่าน")
       .should("have.text", " เปลี่ยนรหัสผ่าน")
       .and("have.attr", "href", "/change-password")
       .click();
-    cy.get("#passwordchangeform-currentpasswd")
-      .type(Cypress.env("OLDPASS"))
-      .should("have.attr", "name")
-      .and("eq", "PasswordChangeForm[currentPasswd]");
-      cy.get('#passwordchangeform-newpasswd')
-      .type(Cypress.env("NEWPASS"))
-      .should("have.attr", "name")
-      .and("eq", "PasswordChangeForm[newPasswd]");
-      cy.get('#passwordchangeform-verifypasswd')
-      .type(Cypress.env("NEWPASS"))
-      .should("have.attr", "name")
-      .and("eq", "PasswordChangeForm[verifyPasswd]");
-      cy.get(':nth-child(5) > .btn')
-      .contains('เปลี่ยนรหัสผ่าน')
-      .click()
-      cy.url().should("include", "/my-account");
-      cy.get('[data-notify="title"]')
-      .contains('สำเร็จ!')
-      .and('have.text','สำเร็จ!')
+    cy.changePasswordInvalid();
   });
 });
