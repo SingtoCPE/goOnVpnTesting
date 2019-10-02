@@ -18,7 +18,7 @@ Cypress.Commands.add("viewAccountNumber", () => {
     .contains(" ดูเลขที่บัญชี")
     .click();
 });
-// loop + function เติม GP ด้วยบัตรทรูมันนี่
+// เติม GP ด้วยบัตรทรูมันนี่
 Cypress.Commands.add("topupTruemoney", () => {
   cy.viewAccountNumber();
   cy.get('[class="sub-menu"]')
@@ -28,7 +28,13 @@ Cypress.Commands.add("topupTruemoney", () => {
   cy.url().should("include", "/payment-truemoney");
 });
 
-//---------------------- function ---------------------------------
+// เปลี่ยนรหัสผ่านสำเร็จ
+Cypress.Commands.add("changePasswordComplete", () => {
+  
+});
+
+
+//---------------------- Loop ---------------------------------
 // loop เติมวันใช้งาน
 Cypress.Commands.add("loopClickTopupGP", () => {
   for (let i = 1; i < 10; i++) {
