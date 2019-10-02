@@ -47,13 +47,6 @@ describe("Work flow : Price and package", () => {
       // ต้องเติมถึงจะทำ test ผ่าน
     });
 
-    it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  ชำระผ่าน PayPal > กรอก ข้อมูลการชำระเงินไม่สำเร็จ", () => {
-      cy.viewAccountNumber(); // commands
-      cy.loopSelectPaypal(); // commands
-  // - ติดปัญหากดแล้วเด้งไปหน้าอื่น
-  // - ต้องลองจ่ายแบบ paypal
-    });
-
     it("Work flow: ดูเลขที่บัญชี > ชำระค่าบริการ >  ชำระผ่าน PayPal > กรอก ข้อมูลการชำระเงินสำเร็จ", () => {
       cy.viewAccountNumber(); // commands
       cy.loopSelectPaypal(); // commands
@@ -171,7 +164,7 @@ describe("Work flow : Price and package", () => {
       .click()
   })
 
-  it("Work flow: ดูเลขที่บัญชี > ประวัติการทำรายการ >  ประวัติการเติม GP", () => {
+  it("Work flow: ดูเลขที่บัญชี > ประวัติการทำรายการ >  ประวัติการเติมวัน", () => {
     cy.viewAccountNumber(); // commands
     cy.get('[class="sub-menu"]')
       .contains(' ประวัติเติมวัน')
