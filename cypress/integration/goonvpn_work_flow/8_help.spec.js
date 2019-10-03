@@ -9,8 +9,6 @@ describe("Work flow : Download", () => {
     cy.get('[class="dropdown-menu"]')
     .contains('ตอบ-ถามปัญหาการใช้งาน')
     .click()
-    cy.get(':nth-child(1) > .panel-heading > .panel-title > .accordion-toggle')
-    .should('have.attr','href','#faq-477')
-    .click()
+    cy.loopFAQ()
   });
 })

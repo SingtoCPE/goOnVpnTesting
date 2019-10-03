@@ -5,7 +5,18 @@ Cypress.Commands.add("beforeEachHelp", () => {
   );
   cy.visit(Cypress.env("URLMAIN")).wait(500);
   cy.url().should("include", "/");
-  cy.get('#w1 > :nth-child(6) > a')
+  cy.get("#w1 > :nth-child(6) > a")
     .contains("ช่วยเหลือ ")
     .click();
+});
+
+Cypress.Commands.add("loopFAQ", () => {
+  const text = ["#faq-477", "#faq-119", "#faq-7", "#faq-6", "#faq-5", "#faq-4"];
+  for (let i = 0 ; i<text.length;i++) {
+    cy.get(
+      `:nth-child(${i+1}) > .panel-heading > .panel-title > .accordion-toggle`
+    )
+      .should("have.attr", "href", `${text[i]}`)
+      .click();
+  }
 });
