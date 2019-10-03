@@ -24,7 +24,10 @@ describe("Work flow : Installation", () => {
     cy.get('[class="dropdown-menu"]')
       .contains("โปรแกรม Softether VPN Client")
       .click();
-    cy.visit("https://www.goonvpn.com/pages/install-softether");
+    cy.get("#w2 > li.dropdown-submenu > ul > li:nth-child(1) > a")
+      .contains(" วิธีติดตั้ง")
+      .should("have.attr", "href", "/pages/install-softether")
+      .click({ force: true });
     cy.url().should("include", "/pages/install-softether");
     cy.get('[class="sub-link"]')
       .contains(" วิธีการอัพเดทรายการเซิฟเวอร์")
@@ -36,8 +39,10 @@ describe("Work flow : Installation", () => {
     cy.get('[class="dropdown-menu"]')
       .contains("โปรแกรม Softether VPN Client")
       .click();
-    cy.visit("https://www.goonvpn.com/pages/update-softether#");
-    cy.url().should("include", "/pages/update-softether#");
+    cy.get("#w2 > li.dropdown-submenu > ul > li:nth-child(2) > a")
+      .contains(" วิธีอัพเดทเซิฟเวอร์")
+      .should("have.attr", "href", "/pages/update-softether")
+      .click({ force: true });
   });
 
   it("Work flow : Installation > โปรแกรม Softether VPN Client > โปรแกรม Tunnelblick สำหรับ Mac", () => {
