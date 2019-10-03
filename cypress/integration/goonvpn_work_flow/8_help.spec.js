@@ -11,4 +11,10 @@ describe("Work flow : Download", () => {
     .click()
     cy.loopFAQ()
   });
+
+  it("Work flow : Download > ติดต่อเรา",  () => {
+    cy.get('[class="dropdown-menu"]')
+    .contains('ติดต่อเรา')
+    .click()
+  });
 })
