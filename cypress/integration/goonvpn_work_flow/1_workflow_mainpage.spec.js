@@ -4,12 +4,12 @@ describe("Work flow : Main page ", () => {
   beforeEach("go to URL.", () => {
     cy.beforeEachMainpage();
   });
-  //--------------------------------------------------------------------------------
+
   it("Main page : wallpaper menu tab ", () => {
     cy.clearCookies();
-    cy.loopWallpaperMenubar();
+    cy.loopWallpaperMenuTab();
   });
-  //--------------------------------------------------------------------------------
+
   it("Main page : ข่าวสารและโปรโมชั่น tab", () => {
     cy.get('[class="heading"]');
     cy.get('[class="news-desc"]')
@@ -30,14 +30,14 @@ describe("Work flow : Main page ", () => {
       "https://www.goonvpn.com/bank-transfer-payment-update"
     );
   });
-  // //--------------------------------------------------------------------------------
+
   it("Main page : เกมส์ออนไลน์ยอดนิยม tab", () => {
     cy.get('[class="text-center show-all-game"]')
       .contains("คลิ๊กเพื่อดูรายชื่อเกมส์ทั้งหมด")
       .and("contain.text", " คลิ๊กเพื่อดูรายชื่อเกมส์ทั้งหมด")
       .click();
   });
-  // --------------------------------------------------------------------------------
+
   it("Main page : BLOG & FEATURES tab", () => {
     cy.get('[class="blog-home-title"]')
       .contains("Overkill’s The Walking Dead เตรียมเปิด Closed Bata บน PC")
@@ -69,6 +69,6 @@ describe("Work flow : Main page ", () => {
   });
 
   it("Main page : footer tab", () => {
-    cy.loopFooterbar();
+    cy.loopFooterTab();
   });
 });

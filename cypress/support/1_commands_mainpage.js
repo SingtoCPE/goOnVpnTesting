@@ -9,7 +9,7 @@ Cypress.Commands.add("beforeEachMainpage", () => {
 });
 
 // loop: menu bar ---
-Cypress.Commands.add("loopWallpaperMenubar", () => {
+Cypress.Commands.add("loopWallpaperMenuTab", () => {
   const btn = ["btn btn-slide signup", "btn btn-slide ", "btn btn-slide"];
   const path = ["/signup", "/game-reviews", "/pages/introduce-gp"];
   const contains = [
@@ -31,7 +31,7 @@ Cypress.Commands.add("loopWallpaperMenubar", () => {
 });
 
 // loop: footer bar ---
-Cypress.Commands.add("loopFooterbar", () => {
+Cypress.Commands.add("loopFooterTab", () => {
   const text = [
     " ตรวจสอบไอพี",
     " วิธีแจ้งโอนเงิน",
