@@ -4,7 +4,7 @@ Cypress.Commands.add("beforeEachLogin", () => {
   cy.url().should("include", "/");
   cy.get('[class="btn-topbar login"]')
     .contains(" เข้าสู่ระบบ")
-    .and("have.attr", "href", "/login")
+    .should("have.attr", "href", "/login")
     .click();
   cy.url().should("include", "login");
 });

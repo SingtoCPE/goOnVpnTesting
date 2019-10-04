@@ -1,5 +1,3 @@
-//----------------------------- Price and package --------------------------
-// beforeEach Main Price Page ---
 Cypress.Commands.add("beforeEachPrice", () => {
   cy.setCookie(
     "_identity",
@@ -12,23 +10,21 @@ Cypress.Commands.add("beforeEachPrice", () => {
     .click();
 });
 
-// Main Price -----
 Cypress.Commands.add("viewAccountNumber", () => {
   cy.get('[class="btn border-theme btn-block col-xs-12"]')
     .contains(" ดูเลขที่บัญชี")
     .click();
 });
-// เติม GP ด้วยบัตรทรูมันนี่
+
 Cypress.Commands.add("topupTruemoney", () => {
   cy.viewAccountNumber();
   cy.get('[class="sub-menu"]')
     .contains("เติม GP ด้วยบัตรทรูมันนี่​")
-    .and("have.text", " เติม GP ด้วยบัตรทรูมันนี่​")
+    .should("have.text", " เติม GP ด้วยบัตรทรูมันนี่​")
     .click();
   cy.url().should("include", "/payment-truemoney");
 });
 
-// เปลี่ยนรหัสผ่านสำเร็จ
 Cypress.Commands.add("changePasswordComplete", () => {
   cy.get("#passwordchangeform-currentpasswd")
     .type(Cypress.env("PASS"))
@@ -47,7 +43,6 @@ Cypress.Commands.add("changePasswordComplete", () => {
     .click();
 });
 
-// เปลี่ยนรหัสผ่านไม่สำเร็จ
 Cypress.Commands.add("changePasswordInvalid", () => {
   cy.get("#passwordchangeform-currentpasswd")
     .type(Cypress.env("NEWPASS"))
@@ -70,8 +65,6 @@ Cypress.Commands.add("changePasswordInvalid", () => {
   );
 });
 
-//---------------------- Loop ---------------------------------
-// loop เติมวันใช้งาน
 Cypress.Commands.add("loopClickTopupGP", () => {
   for (let i = 1; i < 10; i++) {
     cy.get('[class="special btn-airtime"]')
@@ -90,11 +83,11 @@ Cypress.Commands.add("loopClickTopupGP", () => {
     cy.url().should("include", `/confirm-topup/${i === 7 ? (i = i + 1) : i}`);
     cy.get('[class="btn btn-danger btn-sm btn-topup-time"]')
       .contains(" เติม GP")
-      .and("have.text", " เติม GP")
+      .should("have.text", " เติม GP")
       .click();
   }
 });
-// loop ยกเลิกการเติมวัน
+
 Cypress.Commands.add("loopClickCancel", () => {
   for (let i = 1; i < 10; i++) {
     cy.get(".btn-airtime > a")
@@ -113,11 +106,11 @@ Cypress.Commands.add("loopClickCancel", () => {
     cy.url().should("include", `/confirm-topup/${i === 7 ? (i = i + 1) : i}`);
     cy.get('[class="btn btn-warning btn-sm btn-topup-time"]')
       .contains(" ยกเลิก")
-      .and("have.text", " ยกเลิก")
+      .should("have.text", " ยกเลิก")
       .click();
   }
 });
-// select ชำระผ่าน paypal
+
 Cypress.Commands.add("loopSelectPaypal", () => {
   const price = [100, 150, 300, 500, 1000, 1200];
   const GP = [110, 165, 330, 550, 1100, 1320];
@@ -127,20 +120,20 @@ Cypress.Commands.add("loopSelectPaypal", () => {
     let text2 = ` ${price[i]} บาท   => ได้รับ ${GP[i]}GP`;
     cy.get(":nth-child(2) > .sub-menu > :nth-child(2) > a")
       .contains(" ชำระผ่าน PayPal")
-      .and("have.attr", "href", "/payment-paypal")
+      .should("have.attr", "href", "/payment-paypal")
       .click();
     cy.get('[class="select2-selection select2-selection--single"]')
       .click()
       .get('[class="select2-results"]')
       .contains(i >= 4 ? text : text2)
       .click();
-    // cy.get('[class="hvr-grow-shadow btn btn-theme-bg"]')
-    //   .should("contain.text", " เติม GP")
-    //   .click();
+    cy.get('[class="hvr-grow-shadow btn btn-theme-bg"]').should(
+      "contain.text",
+      " เติม GP"
+    );
   }
 });
 
-// form แจ้งโอนเงินสำเร็จ
 Cypress.Commands.add("loopSelectTransfer", () => {
   const child = [
     "ธนาคารกสิกรไทย - 095-2-96230-4",
@@ -157,7 +150,7 @@ Cypress.Commands.add("loopSelectTransfer", () => {
     cy.url().should("include", "/deposit-notify");
     cy.get('[class="btn border-theme animated shake"]')
       .contains(" บัญชีธนาคารที่รองรับ")
-      .and("have.text", " บัญชีธนาคารที่รองรับ")
+      .should("have.text", " บัญชีธนาคารที่รองรับ")
       .and("have.attr", "href", "/how-to-pay")
       .click();
     cy.get('[class="sub-menu"]')
@@ -170,7 +163,7 @@ Cypress.Commands.add("loopSelectTransfer", () => {
       .children()
       .children()
       .contains(child[i])
-      .and("have.text", child[i])
+      .should("have.text", child[i])
       .click();
     cy.get('[class="form-control krajee-datepicker"]').click();
     cy.get('[data-date="1568505600000"]')
@@ -199,7 +192,6 @@ Cypress.Commands.add("loopSelectTransfer", () => {
   }
 });
 
-// form แจ้งโอนเงินไม่สำเร็จ
 Cypress.Commands.add("loopSelectTransferInvalid", () => {
   cy.get('[class="sub-menu"]')
     .contains(" แจ้งโอนเงิน")
@@ -207,7 +199,7 @@ Cypress.Commands.add("loopSelectTransferInvalid", () => {
   cy.url().should("include", "/deposit-notify");
   cy.get('[class="btn border-theme animated shake"]')
     .contains(" บัญชีธนาคารที่รองรับ")
-    .and("have.text", " บัญชีธนาคารที่รองรับ")
+    .should("have.text", " บัญชีธนาคารที่รองรับ")
     .and("have.attr", "href", "/how-to-pay")
     .click();
   cy.get('[class="sub-menu"]')
@@ -220,7 +212,7 @@ Cypress.Commands.add("loopSelectTransferInvalid", () => {
     .children()
     .children()
     .contains("ธนาคารกสิกรไทย - 095-2-96230-4")
-    .and("have.text", "ธนาคารกสิกรไทย - 095-2-96230-4")
+    .should("have.text", "ธนาคารกสิกรไทย - 095-2-96230-4")
     .click();
   cy.get('[class="form-control krajee-datepicker"]')
     .click()
@@ -236,7 +228,7 @@ Cypress.Commands.add("loopSelectTransferInvalid", () => {
     .and("eq", "inform-button");
   cy.get('[class="help-block"]')
     .contains("กรุณากรอก วันที่โอน")
-    .and("have.text", "กรุณากรอก วันที่โอน");
+    .should("have.text", "กรุณากรอก วันที่โอน");
   cy.get('[class="help-block"]')
     .contains("กรุณากรอก จำนวนเงินที่โอน")
     .and("have.text", "กรุณากรอก จำนวนเงินที่โอน");

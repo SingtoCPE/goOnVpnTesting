@@ -69,7 +69,7 @@ describe("Work flow : Register", () => {
     cy.get(".field-signupform-email > .control-label").click();
     cy.get('[class="help-block"]')
       .should("contain", "กรุณากรอกชื่อผู้ใช้งาน")
-      .and("contain", "กรุณากรอกอีเมลล์ของท่าน")
+      .should("contain", "กรุณากรอกอีเมลล์ของท่าน")
       .and("contain", "กรุณากรอกรหัสผ่านของท่าน");
   });
 
