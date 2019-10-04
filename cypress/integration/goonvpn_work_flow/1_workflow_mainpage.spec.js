@@ -5,12 +5,12 @@ describe("Work flow : Main page ", () => {
     cy.beforeEachMainpage();
   });
   //--------------------------------------------------------------------------------
-  it("Work flow : Main page > wallpaper menu bar ", () => {
+  it("Main page : wallpaper menu tab ", () => {
     cy.clearCookies();
     cy.loopWallpaperMenubar();
   });
   //--------------------------------------------------------------------------------
-  it("Work flow : Main page > ข่าวสารและโปรโมชั่น bar", () => {
+  it("Main page : ข่าวสารและโปรโมชั่น tab", () => {
     cy.get('[class="heading"]');
     cy.get('[class="news-desc"]')
       .get("h4")
@@ -31,14 +31,14 @@ describe("Work flow : Main page ", () => {
     );
   });
   // //--------------------------------------------------------------------------------
-  it("Work flow : Main page > เกมส์ออนไลน์ยอดนิยม bar", () => {
+  it("Main page : เกมส์ออนไลน์ยอดนิยม tab", () => {
     cy.get('[class="text-center show-all-game"]')
       .contains("คลิ๊กเพื่อดูรายชื่อเกมส์ทั้งหมด")
       .and("contain.text", " คลิ๊กเพื่อดูรายชื่อเกมส์ทั้งหมด")
       .click();
   });
   // --------------------------------------------------------------------------------
-  it("Work flow : Main page > BLOG & FEATURES bar", () => {
+  it("Main page : BLOG & FEATURES tab", () => {
     cy.get('[class="blog-home-title"]')
       .contains("Overkill’s The Walking Dead เตรียมเปิด Closed Bata บน PC")
       .and(
@@ -68,7 +68,7 @@ describe("Work flow : Main page ", () => {
       .click();
   });
 
-  it("Work flow : Main page > footer bar", () => {
+  it("Main page : footer tab", () => {
     cy.loopFooterbar();
   });
 });
