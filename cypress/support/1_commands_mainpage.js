@@ -1,5 +1,3 @@
-//----------------------------- Mainpage --------------------------
-// beforeEach Mainpage ---
 Cypress.Commands.add("beforeEachMainpage", () => {
   cy.clearCookies();
   cy.visit(Cypress.env("URLMAIN"))
@@ -8,7 +6,6 @@ Cypress.Commands.add("beforeEachMainpage", () => {
   cy.url().should("eq", "https://www.goonvpn.com/");
 });
 
-// loop: menu bar ---
 Cypress.Commands.add("loopWallpaperMenuTab", () => {
   const btn = ["btn btn-slide signup", "btn btn-slide ", "btn btn-slide"];
   const path = ["/signup", "/game-reviews", "/pages/introduce-gp"];
@@ -30,7 +27,6 @@ Cypress.Commands.add("loopWallpaperMenuTab", () => {
   }
 });
 
-// loop: footer bar ---
 Cypress.Commands.add("loopFooterTab", () => {
   const text = [
     " ตรวจสอบไอพี",

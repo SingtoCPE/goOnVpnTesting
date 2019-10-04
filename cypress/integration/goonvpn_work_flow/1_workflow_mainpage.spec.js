@@ -5,7 +5,7 @@ describe("Work flow : Main page ", () => {
     cy.beforeEachMainpage();
   });
 
-  it("Main page : wallpaper menu tab ", () => {
+  it("Main page : wallpaper menu tab", () => {
     cy.clearCookies();
     cy.loopWallpaperMenuTab();
   });
