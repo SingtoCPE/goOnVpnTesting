@@ -9,3 +9,33 @@ Cypress.Commands.add("beforeEachInstruction", () => {
     .contains("วิธีใช้ ")
     .click();
 });
+
+// loop ---
+Cypress.Commands.add("loopProgramInstuction", () => {
+  const path = [
+    "/pages/use-go-connect",
+    "/pages/use-softether",
+    "/pages/use-tunnelblick",
+    "/pages/install-openvpn-connect-ios",
+    "/pages/install-openvpn-connect-android"
+  ];
+
+  const program = [
+    " GO Connect",
+    " Softether VPN Client",
+    " Tunnelblick สำหรับ Mac",
+    " iPhone, iPad",
+    " Android"
+  ];
+
+  for (let i = 0; i < path.length; i++) {
+    cy.get('[class="dropdown-submenu"]')
+      .contains("วิธีใช้งานโปรแกรม")
+      .click();
+    cy.get(`#w3 > li.dropdown-submenu > ul > li:nth-child(${i + 1}) > a`)
+      .contains(program[i])
+      .click({ force: true });
+    cy.url().should("include", `${path[i]}`);
+    cy.beforeEachInstruction(); //commands
+  }
+});
