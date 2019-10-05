@@ -5,7 +5,8 @@ Cypress.Commands.add("beforeEachDowload", () => {
   );
   cy.visit(Cypress.env("URLMAIN")).wait(500);
   cy.url().should("include", "/");
-  cy.get('#w1 > :nth-child(5) > a')
+  cy.get("#w1 > :nth-child(5) > a")
     .contains("ดาวน์โหลด")
     .click();
+  cy.url().should("include", "/get-client");
 });

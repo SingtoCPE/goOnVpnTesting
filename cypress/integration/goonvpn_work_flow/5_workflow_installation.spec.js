@@ -2,7 +2,7 @@
 
 describe("Work flow : Installation", () => {
   beforeEach("Go to Installation.", () => {
-    cy.beforeEachInstallation(); //commands
+    cy.beforeEachInstallation();
   });
 
   it("Work flow : Installation > โปรแกรม GO Connect", () => {

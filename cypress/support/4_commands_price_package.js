@@ -10,6 +10,55 @@ Cypress.Commands.add("beforeEachPrice", () => {
     .click();
 });
 
+Cypress.Commands.add("loopTopupPackageByTrueMoney", () => {
+  for (let i = 1; i <= 6; i++) {
+    cy.get(
+      `:nth-child(3) > .table-responsive > .table > tbody > :nth-child(${i}) > :nth-child(3) > .btn`
+    )
+      .should("have.text", " เติม GP")
+      .click();
+    cy.url().should("eq", "https://www.goonvpn.com/how-to-pay");
+    cy.go("back");
+  }
+});
+
+Cypress.Commands.add("loopTopupDay", () => {
+  for (let i = 1; i <= 8; i++) {
+    cy.get(
+      ":nth-child(5) > .table-responsive > .table > tbody > :nth-child(1) > :nth-child(3) > .btn"
+    )
+      .should("have.text", " เติมวัน")
+      .click();
+    cy.url().should("eq", "https://www.goonvpn.com/confirm-topup/1");
+    cy.get(".btn-danger")
+      .contains(" เติม GP")
+      .click();
+    cy.url().should("eq", "https://www.goonvpn.com/how-to-pay");
+    cy.go(-2);
+  }
+});
+
+Cypress.Commands.add("loopCancelTopupDay", () => {
+  for (let i = 1; i < 10; i++) {
+    cy.get(
+      `:nth-child(5) > .table-responsive > .table > tbody > :nth-child(${
+        i === 9 ? i - 1 : i
+      }) > :nth-child(3) > .btn`
+    )
+      .should("have.text", " เติมวัน")
+      .click();
+    cy.url().should(
+      "eq",
+      `https://www.goonvpn.com/confirm-topup/${i === 7 ? (i = i + 1) : i}`
+    );
+    cy.get(".btn-warning")
+      .contains(" ยกเลิก")
+      .click();
+    cy.url().should("eq", "https://www.goonvpn.com/airtime-package");
+    cy.go(-2);
+  }
+});
+
 Cypress.Commands.add("viewAccountNumber", () => {
   cy.get('[class="btn border-theme btn-block col-xs-12"]')
     .contains(" ดูเลขที่บัญชี")
@@ -85,10 +134,11 @@ Cypress.Commands.add("loopClickTopupGP", () => {
       .contains(" เติม GP")
       .should("have.text", " เติม GP")
       .click();
+    cy.url().should("eq", "https://www.goonvpn.com/how-to-pay");
   }
 });
 
-Cypress.Commands.add("loopClickCancel", () => {
+Cypress.Commands.add("loopTopupGPClickCancel", () => {
   for (let i = 1; i < 10; i++) {
     cy.get(".btn-airtime > a")
       .contains(" เติมวันใช้งาน")
@@ -108,6 +158,7 @@ Cypress.Commands.add("loopClickCancel", () => {
       .contains(" ยกเลิก")
       .should("have.text", " ยกเลิก")
       .click();
+    cy.url().should("eq", "https://www.goonvpn.com/airtime-package");
   }
 });
 
