@@ -12,25 +12,25 @@ describe("Work flow : Instruction", () => {
   it("Work flow : Instruction > วิธีแจ้งโอนเงิน", () => {
     cy.get("#w3 > :nth-child(2) > a")
       .contains("วิธีแจ้งโอนเงิน")
-      .click()
-      .should("have.attr", "href", "/pages/how-to-transfer");
-    cy.url().should("include", "/pages/how-to-transfer");
+      .should("have.attr", "href", "/pages/how-to-transfer")
+      .click();
+    cy.url().should("eq", "https://www.goonvpn.com/pages/how-to-transfer");
   });
 
   it("Work flow : Instruction > วิธีเติม GP ผ่านทรูมันนี่", () => {
     cy.get("#w3 > :nth-child(3) > a")
       .contains("วิธีเติม GP ผ่านทรูมันนี่")
-      .click()
-      .should("have.attr", "href", "/pages/how-to-truemoney");
-    cy.url().should("include", "/pages/how-to-truemoney");
+      .should("have.attr", "href", "/pages/how-to-truemoney")
+      .click();
+    cy.url().should("eq", "https://www.goonvpn.com/pages/how-to-truemoney");
   });
 
   it("Work flow : Instruction > วิธีเติม GP ผ่าน PayPal", () => {
     cy.get("#w3 > :nth-child(4) > a")
       .contains("วิธีเติม GP ผ่าน PayPal")
-      .click()
-      .should("have.attr", "href", "/pages/how-to-paypal");
-    cy.url().should("include", "/pages/how-to-paypal");
+      .should("have.attr", "href", "/pages/how-to-paypal")
+      .click();
+    cy.url().should("eq", "https://www.goonvpn.com/pages/how-to-paypal");
   });
 
   it("Work flow : Instruction > วิธีเติมวันใช้งาน", () => {
@@ -38,6 +38,6 @@ describe("Work flow : Instruction", () => {
       .contains("วิธีเติมวันใช้งาน")
       .should("have.attr", "href", "/pages/how-to-airtime")
       .click();
-    cy.url().should("include", "/pages/how-to-airtime");
+    cy.url().should("eq", "https://www.goonvpn.com/pages/how-to-airtime");
   });
 });

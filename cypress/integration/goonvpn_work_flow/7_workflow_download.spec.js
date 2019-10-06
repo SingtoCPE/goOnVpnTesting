@@ -2,7 +2,7 @@
 
 describe("Work flow : Download", () => {
   beforeEach("Go to Download.", () => {
-    cy.beforeEachDowload(); //commands
+    cy.beforeEachDowload();
   });
 
   it("Work flow : Download > download for window > Go Connect v1.5.0.0", async () => {
@@ -17,7 +17,7 @@ describe("Work flow : Download", () => {
     await cy
       .get(":nth-child(2) > :nth-child(2) > .btn")
       .contains(" ดาวน์โหลด")
-      .and("have.attr", "href", "/download/softether")
+      .should("have.attr", "href", "/download/softether")
       .click();
   });
 
@@ -27,7 +27,7 @@ describe("Work flow : Download", () => {
         ":nth-child(2) > .text-center > .table-responsive > .table > tbody > tr > :nth-child(2) > .btn"
       )
       .contains(" ดาวน์โหลด")
-      .and("have.attr", "href", "/download/osx")
+      .should("have.attr", "href", "/download/osx")
       .click();
   });
 
@@ -35,7 +35,7 @@ describe("Work flow : Download", () => {
     await cy
       .get('[href="/download/ios"]')
       .contains(" Itunes Store")
-      .and("have.attr", "href", "/download/ios")
+      .should("have.attr", "href", "/download/ios")
       .click();
   });
 
@@ -43,7 +43,7 @@ describe("Work flow : Download", () => {
     await cy
       .get('[href="/download/android"]')
       .contains(" Play Store")
-      .and("have.attr", "href", "/download/android")
+      .should("have.attr", "href", "/download/android")
       .click();
   });
 });
