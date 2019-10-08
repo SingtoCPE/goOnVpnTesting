@@ -48,7 +48,7 @@ describe("Work flow : Installation", () => {
     cy.url().should("eq", "https://www.goonvpn.com/pages/update-softether");
   });
 
-  it("Installation : โปรแกรม Softether VPN Client > โปรแกรม Tunnelblick สำหรับ Mac", () => {
+  it("Installation : โปรแกรม Tunnelblick สำหรับ Mac", () => {
     cy.get('[class="dropdown-menu"]')
       .contains("โปรแกรม Tunnelblick สำหรับ Mac")
       .should("have.attr", "href", "/pages/install-tunnelblick")
@@ -66,7 +66,7 @@ describe("Work flow : Installation", () => {
     cy.url().should("eq", "https://www.goonvpn.com/pages/use-tunnelblick");
   });
 
-  it("Installation : โปรแกรม Softether VPN Client > OpenVPN Connect สำหรับ iPhone, iPad", () => {
+  it("Installation : OpenVPN Connect สำหรับ iPhone, iPad", () => {
     cy.get('[class="dropdown-menu"]')
       .contains("OpenVPN Connect สำหรับ iPhone, iPad")
       .should("have.attr", "href", "/pages/install-openvpn-connect-ios")
@@ -81,7 +81,7 @@ describe("Work flow : Installation", () => {
       .click();
   });
 
-  it("Installation : โปรแกรม Softether VPN Client > OpenVPN Connect สำหรับ Android", () => {
+  it("Installation : OpenVPN Connect สำหรับ Android", () => {
     cy.get('[class="dropdown-menu"]')
       .contains("OpenVPN Connect สำหรับ Android")
       .should("have.attr", "href", "/pages/install-openvpn-connect-android")
