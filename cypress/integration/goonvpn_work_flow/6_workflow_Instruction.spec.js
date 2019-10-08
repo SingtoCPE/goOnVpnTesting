@@ -5,7 +5,7 @@ describe("Work flow : Instruction", () => {
     cy.beforeEachInstruction();
   });
 
-  it("Instruction : วิธีใช้ > วิธีใช้งานโปรแกรม", () => {
+  it("Instruction : วิธีใช้งานโปรแกรม", () => {
     cy.loopProgramInstuction();
   });
 
