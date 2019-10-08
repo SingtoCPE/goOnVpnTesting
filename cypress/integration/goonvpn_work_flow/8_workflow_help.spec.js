@@ -5,7 +5,7 @@ describe("Work flow : Download", () => {
     cy.beforeEachHelp();
   });
 
-  it("Work flow : Download > ตอบ-ถามปัญหาการใช้งาน", () => {
+  it("Help : ตอบ-ถามปัญหาการใช้งาน", () => {
     cy.get('[class="dropdown-menu"]')
       .contains("ตอบ-ถามปัญหาการใช้งาน")
       .click();
@@ -13,7 +13,7 @@ describe("Work flow : Download", () => {
     cy.loopFAQ();
   });
 
-  it("Work flow : Download > ติดต่อเรา", () => {
+  it("Help : ติดต่อเรา", () => {
     cy.get('[class="dropdown-menu"]')
       .contains("ติดต่อเรา")
       .click();

@@ -9,7 +9,7 @@ describe("Work flow : Price and package", () => {
     cy.loopTopupPackageByTrueMoney();
   });
 
-  it("Price & Package : loopTopupDay", () => {
+  it("Price & Package : ตารางการเติมวัน", () => {
     cy.loopTopupDay();
     cy.loopCancelTopupDay();
   });
