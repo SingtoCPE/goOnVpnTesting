@@ -8,6 +8,7 @@ Cypress.Commands.add("beforeEachPrice", () => {
   cy.get('[class="nav navbar-nav navbar-right"]')
     .contains("ราคา และ แพ็กเกจ")
     .click();
+  cy.url().should("eq", "https://www.goonvpn.com/price");
 });
 
 Cypress.Commands.add("loopTopupPackageByTrueMoney", () => {
@@ -63,6 +64,7 @@ Cypress.Commands.add("viewAccountNumber", () => {
   cy.get('[class="btn border-theme btn-block col-xs-12"]')
     .contains(" ดูเลขที่บัญชี")
     .click();
+  cy.url().should("eq", "https://www.goonvpn.com/how-to-pay");
 });
 
 Cypress.Commands.add("topupTruemoney", () => {

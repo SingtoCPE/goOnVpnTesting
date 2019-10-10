@@ -29,7 +29,6 @@ describe("Work flow : Installation", () => {
       .should("have.attr", "href", "/pages/install-softether")
       .click({ force: true });
     cy.url().should("eq", "https://www.goonvpn.com/pages/install-softether");
-    cy.url().should("include", "/pages/install-softether");
     cy.get('[class="sub-link"]')
       .contains(" วิธีการอัพเดทรายการเซิฟเวอร์")
       .should("have.attr", "href", "/pages/update-softether")
