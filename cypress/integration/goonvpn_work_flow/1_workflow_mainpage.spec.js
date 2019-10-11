@@ -6,7 +6,7 @@ describe("Work flow : Main page ", () => {
   });
 
   it("Main page : wallpaper menu tab", () => {
-    cy.clearCookies();
+    cy.clearCookie("_identity");
     cy.loopWallpaperMenuTab();
   });
 

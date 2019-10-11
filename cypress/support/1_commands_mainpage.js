@@ -1,5 +1,5 @@
 Cypress.Commands.add("beforeEachMainpage", () => {
-  cy.clearCookies();
+  cy.clearCookie("_identity");
   cy.visit(Cypress.env("URLMAIN"))
     .contains("หน้าแรก")
     .wait(500);

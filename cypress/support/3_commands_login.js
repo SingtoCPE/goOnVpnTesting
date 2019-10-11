@@ -1,5 +1,5 @@
 Cypress.Commands.add("beforeEachLogin", () => {
-  cy.clearCookies();
+  cy.clearCookie("_identity");
   cy.visit(Cypress.env("URLMAIN")).wait(500);
   cy.url().should("include", "/");
   cy.get('[class="btn-topbar login"]')
